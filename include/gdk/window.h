@@ -42,6 +42,9 @@ namespace gdk
         //! Causes GLFW to poll events for the current window
         //void PollEvents();
 
+        //! indicates whether or not the window should close
+        bool shouldClose();
+
         //! get direct access to the GLFW pointer, primarily to allow GLFW dependant projects to work alongside this wrapper.
         GLFWwindow *const getPointerToGLFWWindow();
     //window.SwapBuffer();

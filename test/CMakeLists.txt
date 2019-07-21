@@ -1,6 +1,6 @@
 # © 2019 Joseph Cameron - All Rights Reserved
 
-#[[jfc_add_tests(
+jfc_add_tests(
     C++_STANDARD 17
     C_STANDARD 90
 
@@ -12,5 +12,5 @@
 
     LIBRARIES
         "${${PROJECT_NAME}_LIBRARIES}"
-)]]
+)
 

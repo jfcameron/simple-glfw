@@ -20,23 +20,13 @@ jfc_project(library
 
     PUBLIC_INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-
-        ${gdkmath_INCLUDE_DIRECTORIES} 
-
-        ${GLEW_INCLUDE_DIR} # not currently used. must fix glfw/glew entanglement
-        ${glfw_INCLUDE_DIR} # this was required on windows to get access to glew. This is a good reason to separate the two # TODO: SEPARATE GLFW from GLEW
+        ${glfw_INCLUDE_DIR}
 
     PRIVATE_INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_SOURCE_DIR}/src/include
 
-        ${stb_INCLUDE_DIR}
-        ${nlohmann_INCLUDE_DIR}
-
     LIBRARIES
-        ${gdkmath_LIBRARIES}
-
-        ${GLEW_LIBRARIES} # not currently used. must fix glfw/glew entanglement
-        ${glfw_LIBRARIES} # Separate GLEW, you fool
+        ${glfw_LIBRARIES}
 
     DEPENDENCIES
         "glfw"

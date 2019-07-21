@@ -63,6 +63,11 @@ namespace gdk
                     else throw std::runtime_error(std::string(TAG).append("/wrapper associated with current glfw window instance is null"));
                 });
 
+                glfwSetWindowCloseCallback(pWindow, [](GLFWwindow *const pCurrentWindow)
+                {
+                    glfwSetWindowShouldClose(pCurrentWindow, GLFW_TRUE);
+                });
+
 #if defined JFC_TARGET_PLATFORM_Linux || defined JFC_TARGET_PLATFORM_Windows
                 if (GLenum err = glewInit() != GLEW_OK) throw std::runtime_error(std::string(TAG).append("/glewinit failed: ").append(glewGetErrorString(err)));
 #endif
@@ -125,6 +130,11 @@ namespace gdk
     std::string SimpleGLFWWindow::getName()
     {
         return m_Name;
+    }
+
+    bool SimpleGLFWWindow::shouldClose()
+    {
+        return glfwWindowShouldClose(m_pGLFWWindow.get());
     }
 }
 
