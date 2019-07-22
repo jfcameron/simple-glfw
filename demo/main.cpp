@@ -1,20 +1,28 @@
 // © 2019 Joseph Cameron - All Rights Reserved
 
 #include <cstdlib>
+#include <vector>
 
-#include <gdk/window.h>
+#include <jfc/window.h>
 
 using namespace gdk;
 
 int main(int argc, char **argv)
 {
-    SimpleGLFWWindow window("name");
+    std::vector<SimpleGLFWWindow> windows;
 
-    while(!window.shouldClose())
+    for (int i = 0; i < 3; ++i) windows.push_back(SimpleGLFWWindow("demo"));
+
+    while (windows.size()) for (decltype(windows)::size_type i = 0; i < windows.size();)
     {
-        window.pollEvents();
+        if (!windows[i].shouldClose())
+        {
+            windows[i].pollEvents();
+            windows[i].swapBuffer(); 
 
-        window.SwapBuffer(); 
+            ++i;
+        }
+        else windows.erase(windows.begin() + i);
     }
 
     return EXIT_SUCCESS;

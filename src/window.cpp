@@ -1,6 +1,6 @@
 // © 2018-2019 Joseph Cameron - All Rights Reserved
 
-#include <gdk/window.h>
+#include <jfc/window.h>
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
 #include <emscripten/bind.h>
@@ -21,7 +21,7 @@ static constexpr char TAG[] = "SimpleGLFWWindow";
 
 namespace gdk
 {
-    SimpleGLFWWindow::SimpleGLFWWindow(const std::string &aName)
+    SimpleGLFWWindow::SimpleGLFWWindow(const std::string_view aName, const window_size_type &aScreenSize)
     : m_pGLFWWindow([&]()
         {        
             glfwSetErrorCallback([](int, const char *msg)
@@ -30,22 +30,19 @@ namespace gdk
             });
         
             if (!glfwInit()) throw std::runtime_error(std::string(TAG).append("/glfwInit failed"));
-                
-            //const gdk::IntVector2 aScreenSize(400,300);
-            const SimpleGLFWWindow::window_size_type aScreenSize = std::make_pair(400,300);
-        
-            windowSize = aScreenSize;
         
             //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
             glfwWindowHint(GLFW_RESIZABLE, true);
 
-            if (GLFWwindow *pWindow = glfwCreateWindow(aScreenSize.first, aScreenSize.second, aName.c_str(), nullptr, nullptr))
+            if (GLFWwindow *const pWindow = glfwCreateWindow(aScreenSize.first, aScreenSize.second, aName.data(), nullptr, nullptr))
             {
                 glfwMakeContextCurrent(pWindow);
 
-                // Vsync controller. if not called, the interval is platform dependent. 0 is off. negative values allow for swapping even if the backbuffer arrives late (vendor extension dependent).
-                glfwSwapInterval(-1); 
+                glfwSwapInterval(-1); //Vsync controller. if not called, the interval is platform dependent. 0 is off. negative values allow for swapping even if the backbuffer arrives late (vendor extension dependent).
+
+                glClearColor(0, 0, 0, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
 
                 glfwSwapBuffers(pWindow); //Must be called once to see the buffer we cleared
 
@@ -57,8 +54,8 @@ namespace gdk
                 {
                     if (SimpleGLFWWindow *const pCurrentWrapper = static_cast<SimpleGLFWWindow *const>(glfwGetWindowUserPointer(pCurrentGLFWwindow)))
                     {
-                        pCurrentWrapper->windowSize.first =  aX;
-                        pCurrentWrapper->windowSize.second = aY;
+                        pCurrentWrapper->m_WindowSize.first =  aX;
+                        pCurrentWrapper->m_WindowSize.second = aY;
                     }
                     else throw std::runtime_error(std::string(TAG).append("/wrapper associated with current glfw window instance is null"));
                 });
@@ -71,6 +68,7 @@ namespace gdk
 #if defined JFC_TARGET_PLATFORM_Linux || defined JFC_TARGET_PLATFORM_Windows
                 if (GLenum err = glewInit() != GLEW_OK) throw std::runtime_error(std::string(TAG).append("/glewinit failed: ").append(glewGetErrorString(err)));
 #endif
+
                 return pWindow;
             }
             else throw std::runtime_error(std::string(TAG).append("/glfwCreateWindow failed. Can the environment provide a GLES2.0/WebGL1.0 context?"));
@@ -80,6 +78,7 @@ namespace gdk
             glfwDestroyWindow(ptr);
         })
         , m_Name(aName)
+        , m_WindowSize(aScreenSize)
     {}
 
     GLFWwindow *const SimpleGLFWWindow::getPointerToGLFWWindow()
@@ -87,52 +86,52 @@ namespace gdk
         return m_pGLFWWindow.get();
     }
 
-    void SimpleGLFWWindow::SwapBuffer()
+    void SimpleGLFWWindow::swapBuffer()
     {
         glfwSwapBuffers(m_pGLFWWindow.get());
     }
 
-    double SimpleGLFWWindow::GetTime()
+    /*double SimpleGLFWWindow::GetTime()
     {
         return glfwGetTime();
-    }
+    }*/
 
-    SimpleGLFWWindow::window_size_type SimpleGLFWWindow::GetWindowSize()        
+    SimpleGLFWWindow::window_size_type SimpleGLFWWindow::getWindowSize() const       
     {
-        return windowSize;
+        return m_WindowSize;
     }
 
-    bool SimpleGLFWWindow::GetMouseButton(const int aButton)
+    bool SimpleGLFWWindow::getMouseButton(const int aButton) const
     {
         return glfwGetMouseButton(m_pGLFWWindow.get(), aButton);
     }
 
-    SimpleGLFWWindow::cursor_position_type SimpleGLFWWindow::GetCursorPos()
+    SimpleGLFWWindow::cursor_position_type SimpleGLFWWindow::getCursorPos() const
     {
         double x,y;
         glfwGetCursorPos(m_pGLFWWindow.get(), &x, &y);
 
-        return cursor_position_type(static_cast<float>(x), static_cast<float>(y));
+        return cursor_position_type(static_cast<cursor_position_type::first_type>(x), static_cast<cursor_position_type::second_type>(y));
     }
 
-    bool SimpleGLFWWindow::GetKey(const int aKeyCode)
+    bool SimpleGLFWWindow::getKey(const int aKeyCode) const
     {
         return static_cast<bool>(glfwGetKey(m_pGLFWWindow.get(), aKeyCode));
     }
 
     void SimpleGLFWWindow::pollEvents()
     {
-        //TODO: call makecontextcurrent or soemthing
+        //glfwMakeContextCurrent(m_pGLFWWindow.get()); //TODO: call makecontextcurrent or soemthing
 
         glfwPollEvents();
     }
 
-    std::string SimpleGLFWWindow::getName()
+    std::string_view SimpleGLFWWindow::getName() const
     {
         return m_Name;
     }
 
-    bool SimpleGLFWWindow::shouldClose()
+    bool SimpleGLFWWindow::shouldClose() const
     {
         return glfwWindowShouldClose(m_pGLFWWindow.get());
     }

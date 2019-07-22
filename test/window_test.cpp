@@ -5,7 +5,7 @@
 #include <jfc/catch.hpp>
 #include <jfc/types.h>
 
-#include <gdk/window.h>
+#include <jfc/window.h>
 
 using namespace gdk;
 
