@@ -78,7 +78,7 @@ jfc_set_dependency_symbols(
         ${X11_INCLUDE_DIR}
 
     LIBRARIES
-        ${CMAKE_BINARY_DIR}/thirdparty/glfw/src/libglfw3.a
+        ${PROJECT_BINARY_DIR}/glfw/src/libglfw3.a
 
         # Graphics interface
         ${OPENGL_LIBRARIES}
