@@ -1,6 +1,6 @@
 // © 2018-2019 Joseph Cameron - All Rights Reserved
 
-#include <jfc/window.h>
+#include <jfc/window_glfw.h>
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
 #include <emscripten/bind.h>

@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <vector>
 
-#include <jfc/window.h>
+#include <jfc/window_glfw.h>
 
 using namespace gdk;
 
