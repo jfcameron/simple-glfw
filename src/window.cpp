@@ -3,6 +3,7 @@
 #include <simpleglfw/buildinfo.h>
 
 #include <jfc/window.h>
+#include <jfc/window_glfw.h>
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
 #include <emscripten/bind.h>
