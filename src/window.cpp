@@ -22,6 +22,15 @@
 
 static constexpr char TAG[] = "SimpleGLFWWindow";
 
+// Oddity that only affects mac. Should look through glfw git log / release notes to see if addressed
+static constexpr int WINDOWS_SIZE_SCALE =
+#ifdef JFC_TARGET_PLATFORM_Darwin
+2
+#else
+1
+#endif
+;
+
 namespace gdk
 {
     SimpleGLFWWindow::SimpleGLFWWindow(const std::string_view aName, const window_size_type &aScreenSize)
@@ -57,8 +66,8 @@ namespace gdk
                 {
                     if (SimpleGLFWWindow *const pCurrentWrapper = static_cast<SimpleGLFWWindow *const>(glfwGetWindowUserPointer(pCurrentGLFWwindow)))
                     {
-                        pCurrentWrapper->m_WindowSize.first =  aX;
-                        pCurrentWrapper->m_WindowSize.second = aY;
+                        pCurrentWrapper->m_WindowSize.first =  aX * WINDOWS_SIZE_SCALE;
+                        pCurrentWrapper->m_WindowSize.second = aY * WINDOWS_SIZE_SCALE;
                     }
                     else throw std::runtime_error(std::string(TAG).append("/wrapper associated with current glfw window instance is null"));
                 });
@@ -88,7 +97,7 @@ namespace gdk
             glfwDestroyWindow(ptr);
         })
         , m_Name(aName)
-        , m_WindowSize(aScreenSize)
+        , m_WindowSize({aScreenSize.first * WINDOWS_SIZE_SCALE, aScreenSize.second * WINDOWS_SIZE_SCALE})
     {}
 
     GLFWwindow *const SimpleGLFWWindow::getPointerToGLFWWindow()
