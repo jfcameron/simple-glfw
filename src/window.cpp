@@ -1,5 +1,7 @@
 // © 2018-2019 Joseph Cameron - All Rights Reserved
 
+#include <simpleglfw/buildinfo.h>
+
 #include <jfc/window.h>
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
@@ -66,7 +68,14 @@ namespace gdk
                 });
 
 #if defined JFC_TARGET_PLATFORM_Linux || defined JFC_TARGET_PLATFORM_Windows
-                if (GLenum err = glewInit() != GLEW_OK) throw std::runtime_error(std::string(TAG).append("/glewinit failed: ").append(glewGetErrorString(err)));
+                if (GLenum err = glewInit() != GLEW_OK) 
+                {
+                    std::stringstream ss;
+
+                    ss << TAG << "/glewinit failed: " << glewGetErrorString(err);
+                
+                    throw std::runtime_error(ss.str()); 
+                }
 #endif
 
                 return pWindow;
