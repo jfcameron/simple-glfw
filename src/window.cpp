@@ -25,7 +25,7 @@ static constexpr char TAG[] = "SimpleGLFWWindow";
 // Oddity that only affects mac. Should look through glfw git log / release notes to see if addressed
 static constexpr int WINDOWS_SIZE_SCALE =
 #ifdef JFC_TARGET_PLATFORM_Darwin
-2
+1
 #else
 1
 #endif
