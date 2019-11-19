@@ -51,7 +51,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Darwin" OR CMAKE_SYSTEM_NAME MATCHES "Linux" OR CM
         add_custom_command(TARGET ${PROJECT_NAME}
             POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${PROJECT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>")
 
-        set(GLEW_LIBRARIES ${PROJECT_BINARY_DIR}/libGLEW.a)
+        set(GLEW_LIBRARIES ${PROJECT_BINARY_DIR}/libGLEW${CMAKE_STATIC_LIBRARY_SUFFIX})
         set(GLEW_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/include)
 
         if(CMAKE_SYSTEM_NAME MATCHES "Linux")
@@ -78,7 +78,7 @@ jfc_set_dependency_symbols(
         ${X11_INCLUDE_DIR}
 
     LIBRARIES
-        ${PROJECT_BINARY_DIR}/glfw/src/libglfw3.a
+        ${PROJECT_BINARY_DIR}/glfw/src/libglfw3${CMAKE_STATIC_LIBRARY_SUFFIX}
 
         # Graphics interface
         ${OPENGL_LIBRARIES}
