@@ -11,7 +11,3 @@ jfc_generate_documentation_doxygen(
         ../include/
 )
 
-jfc_generate_readme_md(
-    BRIEF "cpp wrapper for glfw3."
-)
-

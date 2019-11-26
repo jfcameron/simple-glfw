@@ -1,11 +1,13 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 
-set(dependencies
-    "glfw" # some cleanup here gotta be done
-)
+unset(dependencies)
 
-#add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/gdk-math")
-#add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/jfc-memory")
-
+if(NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    set(dependencies
+        "glfw" # some cleanup here gotta be done
+    )
 jfc_add_dependencies(${dependencies})
+else()
+    set(glfw_INCLUDE_DIR "/Users/josephcameron/Workspace/emscripten/system/include")
+endif()
 

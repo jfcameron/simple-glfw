@@ -1,5 +1,9 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 
+if(CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    set(CMAKE_EXECUTABLE_SUFFIX .html) # bit of a hack. Probably should be parameterized.
+endif()
+
 jfc_project(executable
     NAME "simpleglfw-demo"
     VERSION 1.0
