@@ -21,10 +21,6 @@ void do_frame() // This all works but its a real nasty hack. Im confused about t
     static int a = 0;
 
     std::cout << "blar\n";
-    
-    //glClear(GL_COLOR_BUFFER_BIT);
-    //glfwSwapBuffers(window);
-    //windows.begin()->pollEvents();
 
     glfwPollEvents();
 
@@ -33,7 +29,7 @@ void do_frame() // This all works but its a real nasty hack. Im confused about t
 
 int main(int argc, char **argv)
 {
-    for (int i = 0; i < 1; ++i) windows.push_back(glfw_window("demo"));
+    for (int i(0); i < 1; ++i) windows.push_back(glfw_window("demo"));
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
     emscripten_set_main_loop(do_frame, 0, 1);

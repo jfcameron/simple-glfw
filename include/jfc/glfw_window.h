@@ -3,6 +3,7 @@
 #ifndef SIMPLE_GLFW_WINDOW_H
 #define SIMPLE_GLFW_WINDOW_H
 
+#include <array>
 #include <cstddef>
 #include <functional>
 #include <memory>
@@ -11,8 +12,7 @@
 #include <utility>
 #include <vector>
 
-struct GLFWcursor;
-struct GLFWwindow;
+#include <GLFW/glfw3.h>
 
 namespace gdk
 {
@@ -35,6 +35,47 @@ namespace gdk
         //! unique_ptr type for the cursor image
         using cursor_pointer_type = std::unique_ptr<GLFWcursor, std::function<void(GLFWcursor *)>>;
 
+        //! alias for cursor image size. GLFW has strict requirements about this: 16x16 RGBA32 (1 byte per channel)
+        using cursor_image_type = std::array<std::byte, 16 * 16 * 4>;
+
+        //! POD structure for holding icon image data. RGBA32 format of userdefined dimensions
+        struct icon_image_type
+        {
+            size_t width_pixels; //!< number of pixels wide
+            size_t height_pixels; //!< number of pixels tall
+
+            std::vector<std::byte> data_rgba32; //!< raw byte data
+
+            static constexpr size_t CHANNEL_COUNT = 4;
+        };
+
+        //! alias for collection of icon images.
+        using icon_image_collection_type = std::vector<icon_image_type>;
+
+        //! cursor graphics that are provided by the system.
+        enum class standard_cursor
+        {
+            arrow, //!< regular arrow cursor
+            ibeam, //!< text input I-beam cursor shape
+            crosshair, //!< cross shaped cursor
+            hand, //!< indexing finger
+            horizontal_resizer, //!< cursor used to indicate some GUI element is being horizontally resized
+            vertical_resizer //!< cursor used to indicate some GUI element is being vertically resized
+        };
+
+        //! mouse button names, used when checking state of a mouse button
+        enum class mouse_button : const decltype(GLFW_MOUSE_BUTTON_LEFT)
+        {
+            left = GLFW_MOUSE_BUTTON_LEFT,
+            right = GLFW_MOUSE_BUTTON_RIGHT,
+            middle = GLFW_MOUSE_BUTTON_MIDDLE,
+            four = GLFW_MOUSE_BUTTON_4,
+            five = GLFW_MOUSE_BUTTON_5,
+            six = GLFW_MOUSE_BUTTON_6,
+            seven = GLFW_MOUSE_BUTTON_7,
+            eight = GLFW_MOUSE_BUTTON_8
+        };
+
     private:
         //! pointer to the glfw window
         window_pointer_type m_pGLFWWindow;
@@ -49,15 +90,21 @@ namespace gdk
         window_size_type m_WindowSize;
 
     public:
-        // -==--==-=--= TODO
-        //! sets the window icon. 
-        // Think about this.. this has no effect on mac. hmm
-        void setIcon(std::vector<std::byte> aRGBA32PNG);
+        //! provide a collection of icons of userdefined sizes, to be used by the system to render program icons where required.
+        /// The icon whose dimensions best fit the system's requirements for some specific use case (window frame, 
+        /// item in a taskbar, etc.) will be used for that purpose. 
+        /// It is best practice to provide images of the same subject at a variety of resolutions, to minimize the undesirable 
+        /// visual effects of a minifying or maximizing function (non-uniform column widths and or row heights, blurring).
+        /// Common icon sizes are 16x16, 32x32, 48x48.
+        /// Data format is RGBA 32bit: 4 channels, 1 byte per channel.
+        /// \warning does not affect MacOS. Runtime icon is determined by icons provided in the application bundle. This must be handled at bundle creation time.
+        void setIcons(const icon_image_collection_type &aIconImages);
         
-        //! sets the cursor for the window
-        void setCursor(std::vector<std::byte> aRGBA32PNG);
+        //! sets the window's cursor graphic from a 16x16 RGBA32 bitmap
+        void setCursor(const cursor_image_type &aRGBA32PNG);
 
-        // -==--==-=--=
+        //! set the window's cursor graphic from a standard graphic provided by the system
+        void setCursor(const standard_cursor cursor);
 
         //! indicates whether or not the window should close
         bool shouldClose() const;
@@ -69,7 +116,7 @@ namespace gdk
         window_size_type getWindowSize() const;
 
         //! Get state of button by index
-        bool getMouseButton(const int aButton) const;
+        bool getMouseButton(const mouse_button aButton) const;
 
         //! Get position of the mouse cursor
         cursor_position_type getCursorPos() const;
@@ -99,8 +146,7 @@ namespace gdk
         glfw_window(glfw_window &&) = default;
 
         //! standard constructor
-        glfw_window(const std::string_view aName = "Window", 
-            const window_size_type &aWindowSize = {400, 300});
+        glfw_window(const std::string_view aName = "Window", const window_size_type &aWindowSize = {400, 300});
     };
 }
 
