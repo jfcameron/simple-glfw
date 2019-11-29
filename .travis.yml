@@ -112,9 +112,9 @@ matrix:
       script:
         - |
           cd workspace;git submodule update --init --recursive
-          cmake .. -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-g -O0 -Wall -fprofile-arcs -ftest-coverage"
+          cmake .. -DJFC_BUILD_TESTS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=OFF -DCMAKE_CXX_FLAGS="-g -O0 -Wall -fprofile-arcs -ftest-coverage"
           make
-          make test
+          #make test
           cd ..
           after_success:
           - |
