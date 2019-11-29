@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>simple-glfw: simple-glfw</title>
+<title>simple-glfw: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">simple-glfw
-   &#160;<span id="projectnumber">ca67956bdedfb8514b8304f1b38bb8ed99306b22</span>
+   &#160;<span id="projectnumber">26db00fd459d855c4e6d468c4c08c9394ca60e07</span>
    </div>
   </td>
  </tr>
@@ -61,15 +61,22 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">simple-glfw </div>  </div>
+<div class="title">simple-glfw Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Utility library for working with GLFW. 2 goals: simplify context initialization, simplify dependency management.</p>
+<div class="textblock"><p><a href="https://travis-ci.org/jfcameron/simple-glfw"></a> <a href="https://coveralls.io/github/jfcameron/simple-glfw?branch=master"></a> <a href="https://jfcameron.github.io/simple-glfw/"></a></p>
+<h2>simple-glfw</h2>
+<p>Utility library for working with GLFW. 2 goals: simplify context initialization, simplify dependency management.</p>
 <ol type="1">
 <li>Provides RAII absraction for Window: Window mutating glfw functions are directly accessible as methods. Ctor initializes GLFW and OpenGL. Supports move semantics.</li>
 <li>Build scripts for building crossplatform. Platforms currently supported: MacOS, Windows, Linux, WebAssembly.</li>
 </ol>
-<p>TODO: look into Android. I am aware of an Android port of GLFW but unaware of status. TODO: CI scripts: living build instructions, unit test runners. TODO: more construction time options, especially forward compat and vulk support. </p>
+<p>TODO: look into Android. I am aware of an Android port of GLFW but unaware of status. TODO: CI scripts: living build instructions, unit test runners. TODO: more construction time options, especially forward compat and vulk support.</p>
+<h2>CI &amp; Documentation</h2>
+<p>Documentation generated with doxygen ca be viewed online here: <a href="https://jfcameron.github.io/gdk-graphics/">https://jfcameron.github.io/gdk-graphics/</a></p>
+<p>Coverage calculated with gcov viewable here: <a href="https://coveralls.io/github/jfcameron/gdk-graphics">https://coveralls.io/github/jfcameron/gdk-graphics</a></p>
+<p>CI done using Travis CI. Build scripts cover Windows, Linux, Mac; Clang, GCC, MSVC, MinGW: <a href="https://travis-ci.org/jfcameron/gdk-graphics">https://travis-ci.org/jfcameron/gdk-graphics</a></p>
+<p>catch2 unit tests available under <code>test/</code>. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
