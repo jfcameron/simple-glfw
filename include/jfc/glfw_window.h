@@ -47,14 +47,14 @@ namespace gdk
 
             std::vector<std::byte> data_rgba32; //!< raw byte data
 
-            static constexpr size_t CHANNEL_COUNT = 4;
+            static constexpr size_t CHANNEL_COUNT = 4; //!< number of channels per pixel
         };
 
         //! alias for collection of icon images.
         using icon_image_collection_type = std::vector<icon_image_type>;
 
         //! cursor graphics that are provided by the system.
-        enum class standard_cursor
+        enum class standard_cursor_graphic
         {
             arrow, //!< regular arrow cursor
             ibeam, //!< text input I-beam cursor shape
@@ -92,7 +92,7 @@ namespace gdk
         void setCursor(const cursor_image_type &aRGBA32PNG);
 
         //! set the window's cursor graphic from a standard graphic provided by the system
-        void setCursor(const standard_cursor cursor);
+        void setCursor(const standard_cursor_graphic cursor);
 
         //! indicates whether or not the window should close
         bool shouldClose() const;

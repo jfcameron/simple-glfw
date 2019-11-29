@@ -27,14 +27,14 @@ TEST_CASE("glfw_window tests", "[glfw_window]")
 
     SECTION("can set cursor graphic by system provided graphics")
     {
-        window.setCursor(glfw_window::standard_cursor::ibeam);
+        window.setCursor(glfw_window::standard_cursor_graphic::ibeam);
     }
 
     SECTION("can change cursor graphic by user defined rgba32bit 16x16 bitmap")
     {
         glfw_window::cursor_image_type icon;
 
-        for (int i = 0; i < (16*16*4);++i) icon[i] = static_cast<std::byte>(0xff);
+        for (int i(0); i < (16 * 16 * 4); ++i) icon[i] = static_cast<std::byte>(0xff);
 
         window.setCursor(icon);
     }

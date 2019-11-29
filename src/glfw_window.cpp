@@ -198,7 +198,7 @@ glfw_window::glfw_window(const std::string_view aName,
 {
     cursor_image_type image;
 
-    for (int i = 0; i < (16 * 16 * 4);++i) image[i] = static_cast<std::byte>(cursor_contrast_data[i]);
+    for (int i(0); i < (16 * 16 * 4);++i) image[i] = static_cast<std::byte>(cursor_contrast_data[i]);
 
     setCursor(image);
 }
@@ -287,20 +287,20 @@ void glfw_window::setCursor(const cursor_image_type &aRGBA32PNG)
     glfwSetCursor(m_pGLFWWindow.get(), m_pGLFWCursor.get());
 }
 
-void glfw_window::setCursor(const standard_cursor cursor)
+void glfw_window::setCursor(const standard_cursor_graphic cursor)
 {
     decltype(GLFW_ARROW_CURSOR) glfwStandardCursor;
 
     switch(cursor)
     {
-        case standard_cursor::arrow: glfwStandardCursor = GLFW_ARROW_CURSOR; break;
-        case standard_cursor::ibeam: glfwStandardCursor = GLFW_IBEAM_CURSOR; break;
-        case standard_cursor::crosshair: glfwStandardCursor = GLFW_CROSSHAIR_CURSOR; break;
-        case standard_cursor::hand: glfwStandardCursor = GLFW_HAND_CURSOR; break;
-        case standard_cursor::horizontal_resizer: glfwStandardCursor = GLFW_HRESIZE_CURSOR; break;
-        case standard_cursor::vertical_resizer: glfwStandardCursor = GLFW_VRESIZE_CURSOR; break;
+        case standard_cursor_graphic::arrow: glfwStandardCursor = GLFW_ARROW_CURSOR; break;
+        case standard_cursor_graphic::ibeam: glfwStandardCursor = GLFW_IBEAM_CURSOR; break;
+        case standard_cursor_graphic::crosshair: glfwStandardCursor = GLFW_CROSSHAIR_CURSOR; break;
+        case standard_cursor_graphic::hand: glfwStandardCursor = GLFW_HAND_CURSOR; break;
+        case standard_cursor_graphic::horizontal_resizer: glfwStandardCursor = GLFW_HRESIZE_CURSOR; break;
+        case standard_cursor_graphic::vertical_resizer: glfwStandardCursor = GLFW_VRESIZE_CURSOR; break;
         
-        default: throw std::invalid_argument("unhandled standard_cursor type");
+        default: throw std::invalid_argument("unhandled standard_cursor_graphic type");
     }
 
     m_pGLFWCursor = decltype(m_pGLFWCursor)(
