@@ -182,7 +182,7 @@ glfw_window::glfw_window(const std::string_view aName,
             
                 throw std::runtime_error(ss.str()); 
             }
-        }
+        });
 #endif
 
         return pWindow;
