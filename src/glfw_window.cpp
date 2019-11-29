@@ -194,7 +194,7 @@ glfw_window::glfw_window(const std::string_view aName,
     glfwDestroyWindow(ptr);
 })
 , m_Name(aName)
-, m_WindowSize({aScreenSize.first, aScreenSize.second})
+, m_WindowSize(aScreenSize.first, aScreenSize.second)
 {
     cursor_image_type image;
 
