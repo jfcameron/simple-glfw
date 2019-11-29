@@ -12,7 +12,8 @@
 #include <utility>
 #include <vector>
 
-#include <GLFW/glfw3.h>
+struct GLFWwindow;
+struct GLFWcursor;
 
 namespace gdk
 {
@@ -63,19 +64,6 @@ namespace gdk
             vertical_resizer //!< cursor used to indicate some GUI element is being vertically resized
         };
 
-        //! mouse button names, used when checking state of a mouse button
-        enum class mouse_button : const decltype(GLFW_MOUSE_BUTTON_LEFT)
-        {
-            left = GLFW_MOUSE_BUTTON_LEFT,
-            right = GLFW_MOUSE_BUTTON_RIGHT,
-            middle = GLFW_MOUSE_BUTTON_MIDDLE,
-            four = GLFW_MOUSE_BUTTON_4,
-            five = GLFW_MOUSE_BUTTON_5,
-            six = GLFW_MOUSE_BUTTON_6,
-            seven = GLFW_MOUSE_BUTTON_7,
-            eight = GLFW_MOUSE_BUTTON_8
-        };
-
     private:
         //! pointer to the glfw window
         window_pointer_type m_pGLFWWindow;
@@ -114,9 +102,6 @@ namespace gdk
         
         //! Get size in pixels of the window
         window_size_type getWindowSize() const;
-
-        //! Get state of button by index
-        bool getMouseButton(const mouse_button aButton) const;
 
         //! Get position of the mouse cursor
         cursor_position_type getCursorPos() const;

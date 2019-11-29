@@ -218,11 +218,6 @@ glfw_window::window_size_type glfw_window::getWindowSize() const
     return m_WindowSize;
 }
 
-bool glfw_window::getMouseButton(const mouse_button aButton) const
-{
-    return glfwGetMouseButton(m_pGLFWWindow.get(), static_cast<std::underlying_type<decltype(aButton)>::type>(aButton));
-}
-
 glfw_window::cursor_position_type glfw_window::getCursorPos() const
 {
     double x,y;
