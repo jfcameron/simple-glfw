@@ -51,16 +51,16 @@ matrix:
 #          cd workspace;git submodule update --init --recursive
 #          cmake .. -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_TESTS=OFF #-DCMAKE_CXX_FLAGS=" /W4 /EHsc /WX /std:c++17 /permissive-" 
 #          cmake --build .
-#
-#    - os: windows
-#      name: build windows mingw
-#      compiler: mingw64
-#      install: choco install mingw
-#      script: 
-#        - |
-#          cd workspace;git submodule update --init --recursive
-#          cmake .. -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_TESTS=OFF #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
-#          cmake --build .
+
+    - os: windows
+      name: build windows mingw
+      compiler: mingw64
+      install: choco install mingw
+      script: 
+        - |
+          cd workspace;git submodule update --init --recursive
+          cmake .. -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_TESTS=OFF #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
+          cmake --build .
 
     # Documentation 
     - os: linux
