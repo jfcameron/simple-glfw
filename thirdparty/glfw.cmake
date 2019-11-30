@@ -11,8 +11,11 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 # Note this is only necessary for multi-profile generators (Visual Studio, Xcode)
 jfc_git(COMMAND reset --hard WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/glfw") #jfc_git(COMMAND checkout src/CMakeLists.txt WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/glfw")
 
+
+
 file(APPEND ${CMAKE_CURRENT_LIST_DIR}/glfw/src/CMakeLists.txt "
     # == Hack that copies output to expected location. If you see this, checkout this file
+    set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX \"lib\")
     add_custom_command(TARGET ${PROJECT_NAME}
         POST_BUILD COMMAND \${CMAKE_COMMAND} -E copy \$<TARGET_FILE:${PROJECT_NAME}> \"\${PROJECT_BINARY_DIR}/src/\$<TARGET_FILE_NAME:${PROJECT_NAME}>\")
     # == Hack that copies output to expected location. If you see this, checkout this file
@@ -47,6 +50,8 @@ if(CMAKE_SYSTEM_NAME MATCHES "Darwin" OR CMAKE_SYSTEM_NAME MATCHES "Linux" OR CM
 
         set_target_properties(${PROJECT_NAME} PROPERTIES
             RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
+
+        set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "lib")
 
         add_custom_command(TARGET ${PROJECT_NAME}
             POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${PROJECT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>")
