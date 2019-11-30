@@ -29,6 +29,8 @@ void do_frame() // This all works but its a real nasty hack. Im confused about t
 
 int main(int argc, char **argv)
 {
+	std::cout << "beginning demo...\n";
+
     for (int i(0); i < 1; ++i) windows.push_back(glfw_window("demo"));
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten

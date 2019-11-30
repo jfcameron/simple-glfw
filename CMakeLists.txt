@@ -28,8 +28,8 @@ jfc_project(library
     LIBRARIES
         ${glfw_LIBRARIES}
 
-#    DEPENDENCIES
-#        "glfw"
+    DEPENDENCIES # Why did I disable this?
+        "glfw"
 
     SOURCE_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/src/glfw_window.cpp 
