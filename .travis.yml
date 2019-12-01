@@ -60,7 +60,7 @@ matrix:
         - |
           cd workspace; git submodule update --init --recursive
           cmake .. -G "MinGW Makefiles" -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=OFF -DCMAKE_SH="CMAKE_SH-NOTFOUND" #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
-          #make #cmake --build .
+          cmake --build . #make #cmake --build .
 
     # Documentation 
     - os: linux
