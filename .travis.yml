@@ -28,7 +28,8 @@ matrix:
       script:
         - |
           cd workspace;git submodule update --init --recursive
-          cmake .. -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=ON #-DGLEW_OSMESA=1 #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
+          cmake .. -DJFC_BUILD_TESTS=ON -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=OFF -DGLEW_OSMESA=1
+          #cmake .. -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=ON #-DGLEW_OSMESA=1 #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
           make
           #ctest --extra-verbose
 
@@ -52,15 +53,15 @@ matrix:
           cmake .. -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_TESTS=ON #-DCMAKE_CXX_FLAGS=" /W4 /EHsc /WX /std:c++17 /permissive-" 
           cmake --build .
 
-    - os: windows
-      name: build windows mingw
-      compiler: mingw64
-      install: choco install mingw
-      script: 
-        - |
-          cd workspace; git submodule update --init --recursive
-          cmake .. -G "MinGW Makefiles" -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=OFF -DCMAKE_SH="CMAKE_SH-NOTFOUND" #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
-          mingw32-make #cmake --build .
+#    - os: windows
+#      name: build windows mingw
+#      compiler: mingw64
+#      install: choco install mingw
+#      script: 
+#        - |
+#          cd workspace; git submodule update --init --recursive
+#          cmake .. -G "MinGW Makefiles" -DGLEW_NO_GLU -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=OFF -DCMAKE_SH="CMAKE_SH-NOTFOUND" #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
+#          mingw32-make #cmake --build .
 
     # Documentation 
     - os: linux
