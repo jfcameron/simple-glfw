@@ -28,7 +28,7 @@ matrix:
       script:
         - |
           cd workspace;git submodule update --init --recursive
-          cmake .. -DJFC_BUILD_TESTS=ON -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=OFF -DGLEW_OSMESA=1 -DGLEW_STATIC
+          cmake .. -DJFC_BUILD_TESTS=ON -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_DOCS=OFF -DGLEW_OSMESA=1 -DCMAKE_CXX_FLAGS="-DGLEW_STATIC"
           #cmake .. -DJFC_BUILD_DOCS=OFF -DJFC_BUILD_DEMO=OFF -DJFC_BUILD_TESTS=ON #-DGLEW_OSMESA=1 #-DCMAKE_CXX_FLAGS="-pedantic -Wall -Wextra -Ofast -flto -funroll-loops -m64 -march=native" 
           make
           #ctest --extra-verbose
