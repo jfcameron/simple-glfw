@@ -142,8 +142,10 @@ glfw_window::glfw_window(const std::string_view aName,
         // negative values allow for swapping even if the backbuffer arrives late (vendor extension dependent).
         glfwSwapInterval(-1); 
 
+#if !defined JFC_TARGET_PLATFORM_Emscripten
         //! if the mouse is locked, then use unaccellerated mouse input
         if (glfwRawMouseMotionSupported()) glfwSetInputMode(pWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+#endif
 
         glClearColor(0, 0, 0, 1);
         glClear(GL_COLOR_BUFFER_BIT);
