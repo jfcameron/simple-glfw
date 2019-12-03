@@ -28,7 +28,7 @@ jfc_project(library
     LIBRARIES
         ${glfw_LIBRARIES}
 
-    DEPENDENCIES # Why did I disable this?
+    DEPENDENCIES # Why did I disable this? -> emscripten.
         "glfw"
 
     SOURCE_LIST

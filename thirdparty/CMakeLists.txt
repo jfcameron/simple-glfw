@@ -9,5 +9,7 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
 jfc_add_dependencies(${dependencies})
 else()
     set(glfw_INCLUDE_DIR "/Users/josephcameron/Workspace/emscripten/system/include")
+
+    project("glfw")
 endif()
 

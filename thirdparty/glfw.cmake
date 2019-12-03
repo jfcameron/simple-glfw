@@ -11,8 +11,6 @@ set(GLFW_INSTALL OFF CACHE BOOL "")
 # Note this is only necessary for multi-profile generators (Visual Studio, Xcode)
 jfc_git(COMMAND reset --hard WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/glfw") #jfc_git(COMMAND checkout src/CMakeLists.txt WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/glfw")
 
-
-
 file(APPEND ${CMAKE_CURRENT_LIST_DIR}/glfw/src/CMakeLists.txt "
     # == Hack that copies output to expected location. If you see this, checkout this file
     set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX \"lib\")
