@@ -29,14 +29,13 @@ void do_frame() // This all works but its a real nasty hack. Im confused about t
 
 int main(int argc, char **argv)
 {
-	std::cout << "beginning demo...\n";
+    std::cout << "beginning demo...\n";
 
     for (int i(0); i < 1; ++i) windows.push_back(glfw_window("demo"));
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
-    emscripten_set_main_loop(do_frame, 0, 1);
-#endif
-
+    //emscripten_set_main_loop(do_frame, 0, 1);
+#else
     while (windows.size()) for (decltype(windows)::size_type i = 0; i < windows.size();)
     {
         glfwPollEvents();
@@ -49,6 +48,7 @@ int main(int argc, char **argv)
         }
         else windows.erase(windows.begin() + i);
     }
+#endif
 
     return EXIT_SUCCESS;
 }
