@@ -11,5 +11,7 @@ else()
     set(glfw_INCLUDE_DIR "/Users/josephcameron/Workspace/emscripten/system/include")
 
     project("glfw")
+
+    add_custom_target(glfw)
 endif()
 
