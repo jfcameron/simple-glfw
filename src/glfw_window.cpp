@@ -203,6 +203,15 @@ glfw_window::glfw_window(const std::string_view aName,
     for (int i(0); i < (16 * 16 * 4);++i) image[i] = static_cast<std::byte>(cursor_contrast_data[i]);
 
     setCursor(image);
+
+    icon_image_type icon;
+
+    icon.width_pixels = 16;
+    icon.height_pixels = 16;
+    
+    for (int i(0); i < (16 * 16 * 4);++i) icon.data_rgba32.push_back(static_cast<std::byte>(cursor_contrast_data[i]));
+
+    setIcons({icon});
 }
 
 GLFWwindow *const glfw_window::getPointerToGLFWWindow()
