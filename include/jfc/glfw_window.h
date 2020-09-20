@@ -19,13 +19,16 @@ namespace gdk
 {
     /// \brief RAII wrapper for GLFW Window.
     /// GLFW functions that operate on glfwWindow pointers are wrapped as methods.
-    /// TODO add support for a OnWindowSizeChanged callback
+    /// TODO add support for a OnWindowSizeChanged callback!
     /// TODO wrap remaining functions here: https://www.glfw.org/docs/latest/window_guide.html
     class glfw_window final
     {
     public:
         //! type alias for window size
         using window_size_type = std::pair<int, int>;
+
+		//! precision type of aspect ratio
+		using window_aspect_ratio_type = double;
         
         //! alias for cursor position
         using cursor_position_type = std::pair<double, double>;
@@ -102,6 +105,9 @@ namespace gdk
         
         //! Get size in pixels of the window
         window_size_type getWindowSize() const;
+
+		//! Get the aspect ratio of the window
+		window_aspect_ratio_type getAspectRatio() const;
 
         //! Get position of the mouse cursor
         cursor_position_type getCursorPos() const;

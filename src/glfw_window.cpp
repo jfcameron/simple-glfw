@@ -229,6 +229,13 @@ glfw_window::window_size_type glfw_window::getWindowSize() const
     return m_WindowSize;
 }
 
+glfw_window::window_aspect_ratio_type glfw_window::getAspectRatio() const
+{
+	return 
+		static_cast<window_aspect_ratio_type>(m_WindowSize.second) / 
+		static_cast<window_aspect_ratio_type>(m_WindowSize.first);
+}
+
 glfw_window::cursor_position_type glfw_window::getCursorPos() const
 {
     double x,y;
