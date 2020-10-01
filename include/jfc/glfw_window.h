@@ -100,6 +100,9 @@ namespace gdk
         //! indicates whether or not the window should close
         bool shouldClose() const;
 
+		//! sets the should close flag to true
+		void close();
+
         //!  get the name of the window
         std::string_view getName() const; 
         

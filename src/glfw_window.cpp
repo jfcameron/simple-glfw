@@ -262,6 +262,11 @@ bool glfw_window::shouldClose() const
     return glfwWindowShouldClose(m_pGLFWWindow.get());
 }
 
+void glfw_window::close()
+{
+	glfwSetWindowShouldClose(m_pGLFWWindow.get(), true);
+}
+
 bool glfw_window::operator==(const glfw_window &a) const
 {
     return m_pGLFWWindow == a.m_pGLFWWindow;
