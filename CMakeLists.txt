@@ -34,7 +34,7 @@ jfc_project(library
 
     DEPENDENCIES
         "glfw"
-        #"${platform_dependencies}"
+        ${platform_dependencies}
 
     SOURCE_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/src/glfw_window.cpp 
