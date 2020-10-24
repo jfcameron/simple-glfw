@@ -10,9 +10,9 @@ option(JFC_BUILD_TESTS "Build unit tests" ON)
 
 add_subdirectory(thirdparty)
 
-#if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
-#    set(platform_dependencies "GLEW")
-#endif()
+if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set(platform_dependencies "GLEW")
+endif()
 
 jfc_project(library
     NAME "simpleglfw"
