@@ -1,10 +1,8 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 
-unset(dependencies)
-
 if(NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
     set(dependencies
-        "glfw" # some cleanup here gotta be done
+        "glfw"
     )
 jfc_add_dependencies(${dependencies})
 else()

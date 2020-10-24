@@ -38,24 +38,24 @@ if(CMAKE_SYSTEM_NAME MATCHES "Darwin" OR CMAKE_SYSTEM_NAME MATCHES "Linux" OR CM
     elseif(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
         find_package(OpenGL REQUIRED)
 
-        project("GLEW") # Its weird to hide glew here but it works...
-
-        add_library(${PROJECT_NAME} STATIC
-            ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/src/glew.c)
-
-        target_include_directories(${PROJECT_NAME} PRIVATE
-            ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/include)
-
-        set_target_properties(${PROJECT_NAME} PROPERTIES
-            RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
-
-        set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "lib")
-
-        add_custom_command(TARGET ${PROJECT_NAME}
-            POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${PROJECT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>")
-
-        set(GLEW_LIBRARIES ${PROJECT_BINARY_DIR}/libGLEW${CMAKE_STATIC_LIBRARY_SUFFIX})
-        set(GLEW_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/include)
+         project("GLEW")
+ 
+         add_library(${PROJECT_NAME} STATIC
+             ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/src/glew.c)
+ 
+         target_include_directories(${PROJECT_NAME} PRIVATE
+             ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/include)
+ 
+         set_target_properties(${PROJECT_NAME} PROPERTIES
+             RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
+ 
+         set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "lib")
+ 
+         add_custom_command(TARGET ${PROJECT_NAME}
+             POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> "${PROJECT_BINARY_DIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>")
+ 
+         set(GLEW_LIBRARIES ${PROJECT_BINARY_DIR}/libGLEW${CMAKE_STATIC_LIBRARY_SUFFIX})
+         set(GLEW_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/glew-2.1.0/include)
 
         if(CMAKE_SYSTEM_NAME MATCHES "Linux")
             find_package(X11 REQUIRED) # Mir? Wayland?
@@ -100,3 +100,4 @@ jfc_set_dependency_symbols(
         ${X11_LIBRARIES}
         ${CMAKE_THREAD_LIBS_INIT}
 )
+
