@@ -2,6 +2,8 @@
 
 cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
+project()
+
 include("${CMAKE_CURRENT_SOURCE_DIR}/jfc-cmake/jfclib.cmake")
 
 option(JFC_BUILD_DEMO "Build the demo" ON)
@@ -10,9 +12,9 @@ option(JFC_BUILD_TESTS "Build unit tests" ON)
 
 add_subdirectory(thirdparty)
 
-if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
-    set(platform_dependencies "GLEW")
-endif()
+#if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
+#    set(platform_dependencies "GLEW")
+#endif()
 
 jfc_project(library
     NAME "simpleglfw"
@@ -34,7 +36,7 @@ jfc_project(library
 
     DEPENDENCIES
         "glfw"
-        "${platform_dependencies}"
+        #"${platform_dependencies}"
 
     SOURCE_LIST
         ${CMAKE_CURRENT_SOURCE_DIR}/src/glfw_window.cpp 
