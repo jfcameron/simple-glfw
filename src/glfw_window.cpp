@@ -176,6 +176,8 @@ glfw_window::glfw_window(const std::string_view aName,
 
         std::call_once(glewInitFlag, []()
         {
+	    glewExperimental = true; //Required on a Linux (Ubuntu 18.04.1 LTS) x86 32bit system
+
             if (GLenum err = glewInit() != GLEW_OK) 
             {
                 std::stringstream ss;

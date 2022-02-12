@@ -25,10 +25,7 @@ jfc_git(COMMAND reset --hard WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/glfw")
 #end workaround
 
 if(CMAKE_SYSTEM_NAME MATCHES "Darwin" OR CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
-    if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-        set (OpenGL_GL_PREFERENCE "GLVND") # Is this appropriate here? Issue first appeard arch machine: both legacy and glvnd available, defaulted to legacy
-    endif()
-
+    set (OpenGL_GL_PREFERENCE "GLVND") #Hint for linux + cmake version < 11, ignored by others
     find_package(OpenGL REQUIRED) # find_package(vulkan REQUIRED)
 
     if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
@@ -82,6 +79,10 @@ jfc_set_dependency_symbols(
 
     LIBRARIES
         ${PROJECT_BINARY_DIR}/glfw/src/libglfw3${CMAKE_STATIC_LIBRARY_SUFFIX}
+        
+	# Linux or Windows
+        ${GLEW_LIBRARIES}
+        ${CMAKE_DL_LIBS}
 
         # Graphics interface
         ${OPENGL_LIBRARIES}
@@ -91,10 +92,6 @@ jfc_set_dependency_symbols(
         ${COCOA_LIBRARY}
         ${CORE_VIDEO} 
         ${IO_KIT} 
-
-        # Linux or Windows
-        ${GLEW_LIBRARIES}
-        ${CMAKE_DL_LIBS}
 
         #Linux specific
         ${X11_LIBRARIES}
