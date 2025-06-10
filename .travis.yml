@@ -1,5 +1,5 @@
-# © 2019 Joseph Cameron - All Rights Reserved
-# gdk-graphics ci script
+# © Joseph Cameron - All Rights Reserved
+# gdk-window ci script
 
 dist: bionic 
 sudo: required
