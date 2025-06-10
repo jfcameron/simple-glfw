@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['glfw_5fwindow',['glfw_window',['../classgdk_1_1glfw__window.html',1,'gdk']]]
+  ['icon_5fimage_5ftype_0',['icon_image_type',['../structgdk_1_1window_1_1icon__image__type.html',1,'gdk::window']]]
 ];

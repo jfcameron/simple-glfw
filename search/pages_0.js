@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['simple_2dglfw',['simple-glfw',['../index.html',1,'']]]
+  ['glfw_0',['simple-glfw',['../index.html',1,'']]]
 ];
