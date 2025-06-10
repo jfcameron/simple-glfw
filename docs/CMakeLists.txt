@@ -9,5 +9,6 @@ jfc_generate_documentation_doxygen(
     
     INCLUDE_DIRECTORIES
         ../include/
+        ../impl/glfw/include/
 )
 
