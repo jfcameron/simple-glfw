@@ -1,48 +1,43 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - All Rights Reserved
 
-#include <cstdlib>
-#include <vector>
-#include <iostream>
-
-#include <jfc/glfw_window.h>
-
-#include <GLFW/glfw3.h>
+#include <gdk/glfw_window.h>
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
 #include <emscripten/emscripten.h>
 #endif
 
+#include <cstdlib>
+#include <vector>
+#include <iostream>
+
 using namespace gdk;
 
-std::vector<glfw_window> windows;
+std::vector<std::shared_ptr<glfw_window>> windows;
 
-void do_frame() // This all works but its a real nasty hack. Im confused about this "Window" abstraction. it encapsulates window realted stuff, primarily init and cleanup but then the user is expected to circumvent it to access glfw. hmm. so how do I hide this emcsript difference?
+void do_frame()
 {
     static int a = 0;
 
-    std::cout << "blar\n";
+    glfw_window::poll_events();
 
-    glfwPollEvents();
-
-    windows.begin()->swapBuffer();
+    (*windows.begin())->swap_buffers();
 }
 
 int main(int argc, char **argv)
 {
     std::cout << "beginning demo...\n";
 
-    for (int i(0); i < 1; ++i) windows.push_back(glfw_window("demo"));
+    for (int i(0); i < 1; ++i) windows.push_back(glfw_window::make("demo"));
 
 #ifdef JFC_TARGET_PLATFORM_Emscripten
-    //emscripten_set_main_loop(do_frame, 0, 1);
+    emscripten_set_main_loop(do_frame, 0, 1);
 #else
-    while (windows.size()) for (decltype(windows)::size_type i = 0; i < windows.size();)
-    {
-        glfwPollEvents();
+    while (windows.size()) for (decltype(windows)::size_type i = 0; i < windows.size();) {
+        glfw_window::poll_events();
 
-        if (!windows[i].shouldClose())
+        if (!windows[i]->should_close())
         {
-            windows[i].swapBuffer(); 
+            windows[i]->swap_buffers(); 
 
             ++i;
         }
