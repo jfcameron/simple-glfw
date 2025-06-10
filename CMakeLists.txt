@@ -1,4 +1,4 @@
-# © 2019-2020 Joseph Cameron - All Rights Reserved
+# © Joseph Cameron - All Rights Reserved
 
 cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
@@ -6,7 +6,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/jfc-cmake/jfclib.cmake")
 
 option(JFC_BUILD_DEMO "Build the demo" ON)
 option(JFC_BUILD_DOCS "Build documentation" ON)
-option(JFC_BUILD_TESTS "Build unit tests" ON)
+option(JFC_BUILD_TESTS "Build unit tests" OFF)
 
 add_subdirectory(thirdparty)
 
@@ -24,6 +24,7 @@ jfc_project(library
 
     PUBLIC_INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/impl/glfw/include
         ${glfw_INCLUDE_DIR}
 
     PRIVATE_INCLUDE_DIRECTORIES
@@ -37,7 +38,7 @@ jfc_project(library
         ${platform_dependencies}
 
     SOURCE_LIST
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/glfw_window.cpp 
+        ${CMAKE_CURRENT_SOURCE_DIR}/impl/glfw/src/glfw_window.cpp 
 )
 
 if (JFC_BUILD_DEMO)

@@ -1,4 +1,4 @@
-// © 2019 Joseph Cameron - All Rights Reserved
+// © Joseph Cameron - All Rights Reserved
 
 #include <string>
 #include <vector>
@@ -6,7 +6,7 @@
 #include <jfc/catch.hpp>
 #include <jfc/types.h>
 
-#include <jfc/glfw_window.h>
+#include <gdk/glfw_window.h>
 
 using namespace gdk;
 
