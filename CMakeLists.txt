@@ -8,7 +8,7 @@ option(JFC_BUILD_DEMO "Build the demo" ON)
 option(JFC_BUILD_DOCS "Build documentation" ON)
 option(JFC_BUILD_TESTS "Build unit tests" OFF)
 
-add_subdirectory(thirdparty)
+add_subdirectory(extern)
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
     set(platform_dependencies "GLEW")

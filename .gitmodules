@@ -3,5 +3,5 @@
 	url = https://github.com/jfcameron/jfc-cmake.git
 
 [submodule "thirdparty/glfw"]
-	path = thirdparty/glfw
+	path = extern/glfw
 	url = https://github.com/glfw/glfw.git
