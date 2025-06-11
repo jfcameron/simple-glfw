@@ -234,6 +234,11 @@ glfw_window::cursor_position_type glfw_window::cursor_position() const {
     double x,y;
     glfwGetCursorPos(m_pGLFWWindow.get(), &x, &y);
 
+    auto windowSize = window_size();
+
+    x /= windowSize.first;
+    y /= windowSize.second;
+
     return cursor_position_type(
         static_cast<cursor_position_type::first_type>(x), 
         static_cast<cursor_position_type::second_type>(y));

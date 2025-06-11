@@ -58,22 +58,23 @@ namespace gdk {
         //! set the window's cursor graphic from a standard graphic provided by the system
         virtual void set_cursor(const standard_cursor_graphic cursor) = 0;
 
-        //! get the name of the window
-        virtual std::string_view name() const = 0; 
-
-        //! Get size in pixels of the window
-        virtual window_size_type window_size() const = 0;
-
-		//! Get the aspect ratio of the window
-		virtual window_aspect_ratio_type aspect_ratio() const = 0;
-
-        //! Get position of the mouse cursor
-        virtual cursor_position_type cursor_position() const = 0;
-
 		//! sets the should close flag to true
 		virtual void close() = 0;
 
-        virtual bool should_close() const = 0;
+        //! get the name of the window
+        [[nodiscard]] virtual std::string_view name() const = 0; 
+
+        //! Get size in pixels of the window
+        [[nodiscard]] virtual window_size_type window_size() const = 0;
+
+		//! Get the aspect ratio of the window
+		[[nodiscard]] virtual window_aspect_ratio_type aspect_ratio() const = 0;
+
+        //! Get the normalized position of the mouse cursor within the window
+        [[nodiscard]] virtual cursor_position_type cursor_position() const = 0;
+
+        //! Indicates to the caller than the window has been requested to be closed
+        [[nodiscard]] virtual bool should_close() const = 0;
     };
 }
 
